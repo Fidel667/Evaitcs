@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Dashboard')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: header}"></header>
+
+<main class="container">
+    <h1>Dashboard
+        <span class="subtitle" th:text="${#temporals.format(data.start, 'MMMM yyyy')}"></span>
+    </h1>
+
+    <!-- Total expense -->
+    <div class="stat-card">
+        <div class="stat-label">Total Expenses This Month</div>
+        <div class="stat-value"
+             th:text="'$' + ${#numbers.formatDecimal(data.totalExpense, 1, 'COMMA', 2, 'POINT')}">$0.00</div>
+    </div>
+
+    <!-- Top 5 categories -->
+    <section class="section">
+        <h2>Top 5 Expense Categories</h2>
+        <div th:if="${#lists.isEmpty(data.topCategories)}" class="empty">No expense transactions this month.</div>
+        <table th:unless="${#lists.isEmpty(data.topCategories)}" class="table">
+            <thead>
+                <tr><th>Category</th><th class="right">Amount</th></tr>
+            </thead>
+            <tbody>
+                <tr th:each="row : ${data.topCategories}">
+                    <td th:text="${row.categoryName}"></td>
+                    <td class="right"
+                        th:text="'$' + ${#numbers.formatDecimal(row.total, 1, 'COMMA', 2, 'POINT')}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Recent transactions -->
+    <section class="section">
+        <h2>10 Most Recent Transactions</h2>
+        <div th:if="${#lists.isEmpty(data.recentTransactions)}" class="empty">No transactions yet.</div>
+        <table th:unless="${#lists.isEmpty(data.recentTransactions)}" class="table">
+            <thead>
+                <tr>
+                    <th>Date</th><th>Account</th><th>Category</th><th>Note</th>
+                    <th class="right">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="tx : ${data.recentTransactions}">
+                    <td th:text="${tx.occurredOn}"></td>
+                    <td th:text="${tx.account.name}"></td>
+                    <td th:text="${tx.category.name}"></td>
+                    <td th:text="${tx.note}"></td>
+                    <td class="right"
+                        th:text="'$' + ${#numbers.formatDecimal(tx.amount, 1, 'COMMA', 2, 'POINT')}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

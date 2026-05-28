@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('My Todos')}"></head>
+<body>
+
+<header th:replace="~{fragments/layout :: header}"></header>
+
+<main class="container">
+
+    <div th:if="${success}" class="flash success" th:text="${success}"></div>
+
+    <section class="filters">
+        <a th:href="@{/todos(filter='all')}"
+           th:classappend="${filter == 'all'} ? 'active' : ''">All</a>
+        <a th:href="@{/todos(filter='active')}"
+           th:classappend="${filter == 'active'} ? 'active' : ''">Active</a>
+        <a th:href="@{/todos(filter='completed')}"
+           th:classappend="${filter == 'completed'} ? 'active' : ''">Completed</a>
+    </section>
+
+    <div th:if="${#lists.isEmpty(todos)}" class="empty">
+        <p>No todos here. <a th:href="@{/todos/new}">Create your first one.</a></p>
+    </div>
+
+    <ul class="todo-list" th:unless="${#lists.isEmpty(todos)}">
+        <li th:each="todo : ${todos}"
+            th:classappend="${todo.completed} ? 'done' : ''">
+
+            <form th:action="@{|/todos/${todo.id}/toggle|}" method="post" class="inline">
+                <button type="submit"
+                        class="check"
+                        th:title="${todo.completed} ? 'Mark active' : 'Mark complete'">
+                    <span th:text="${todo.completed} ? '&#9745;' : '&#9744;'"></span>
+                </button>
+            </form>
+
+            <div class="todo-body">
+                <div class="title" th:text="${todo.title}">Title</div>
+                <div class="desc"
+                     th:if="${todo.description != null and !todo.description.isBlank()}"
+                     th:text="${todo.description}">Description</div>
+                <div class="meta">
+                    <span th:text="${#temporals.format(todo.createdAt, 'yyyy-MM-dd HH:mm')}">created</span>
+                </div>
+            </div>
+
+            <div class="actions">
+                <a class="btn btn-ghost" th:href="@{|/todos/${todo.id}/edit|}">Edit</a>
+                <form th:action="@{|/todos/${todo.id}/delete|}" method="post" class="inline"
+                      onsubmit="return confirm('Delete this todo?');">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+
+</body>
+</html>

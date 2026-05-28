@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Expenses</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+
+<header th:fragment="header">
+    <div class="container nav">
+        <a class="brand" th:href="@{/dashboard}">💰 Expenses</a>
+        <nav class="nav-links">
+            <a th:href="@{/dashboard}">Dashboard</a>
+            <a th:href="@{/transactions}">Transactions</a>
+            <a th:href="@{/accounts}">Accounts</a>
+            <a th:href="@{/categories}">Categories</a>
+        </nav>
+    </div>
+</header>
+
+<footer th:fragment="footer">
+    <div class="container muted">
+        <small>Spring Boot + Thymeleaf · Expense Tracker</small>
+    </div>
+</footer>
+
+</body>
+</html>
