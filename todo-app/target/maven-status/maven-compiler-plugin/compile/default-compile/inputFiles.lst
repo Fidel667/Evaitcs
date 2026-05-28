@@ -1,0 +1,7 @@
+/Users/fidel/Evaitcs/todo-app/src/main/java/com/example/todoapp/TodoAppApplication.java
+/Users/fidel/Evaitcs/todo-app/src/main/java/com/example/todoapp/controller/HomeController.java
+/Users/fidel/Evaitcs/todo-app/src/main/java/com/example/todoapp/controller/TodoController.java
+/Users/fidel/Evaitcs/todo-app/src/main/java/com/example/todoapp/dto/TodoForm.java
+/Users/fidel/Evaitcs/todo-app/src/main/java/com/example/todoapp/entity/Todo.java
+/Users/fidel/Evaitcs/todo-app/src/main/java/com/example/todoapp/repository/TodoRepository.java
+/Users/fidel/Evaitcs/todo-app/src/main/java/com/example/todoapp/service/TodoService.java
