@@ -1,7 +1,9 @@
-import CartIcon from './CartIcon';
+import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import CartIcon from './CartIcon';
 
 export default function Header({ onLogoClick, onCartClick, onLoginClick }) {
+  const { totalItems }   = useCart();
   const { user, logout } = useAuth();
 
   return (
@@ -17,7 +19,7 @@ export default function Header({ onLogoClick, onCartClick, onLoginClick }) {
         ) : (
           <button onClick={onLoginClick}>Log in</button>
         )}
-        <CartIcon onClick={onCartClick} />
+        <CartIcon count={totalItems} onClick={onCartClick} />
       </div>
     </header>
   );

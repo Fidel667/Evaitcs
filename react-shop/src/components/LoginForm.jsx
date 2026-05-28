@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
 export default function LoginForm({ onSuccess }) {
-  const { login }   = useAuth();
-  const [username, setUsername]     = useState('');
-  const [password, setPassword]     = useState('');
-  const [error, setError]           = useState(null);
+  const { login } = useAuth();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError]       = useState(null);
   const [submitting, setSubmitting] = useState(false);
 
   async function handleSubmit(e) {

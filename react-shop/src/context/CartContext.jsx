@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useReducer } from 'react';
 const CartContext = createContext(null);
 
 const initialState = {
-  items: [], // [{ id, title, price, thumbnail, quantity }]
+  items: [],   // [{ id, title, price, thumbnail, quantity }]
 };
 
 function cartReducer(state, action) {
@@ -78,11 +78,9 @@ export function CartProvider({ children }) {
   const totalItems = state.items.reduce((sum, i) => sum + i.quantity, 0);
   const totalPrice = state.items.reduce((sum, i) => sum + i.quantity * i.price, 0);
 
-  return (
-    <CartContext.Provider value={{ state, dispatch, totalItems, totalPrice }}>
-      {children}
-    </CartContext.Provider>
-  );
+  const value = { state, dispatch, totalItems, totalPrice };
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
 export function useCart() {

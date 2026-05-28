@@ -1,33 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useFetch } from '../hooks/useFetch';
 import { useCart } from '../context/CartContext';
 
 export default function ProductDetail({ productId, onBack }) {
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError]     = useState(null);
-  const { dispatch }          = useCart();
-
-  useEffect(() => {
-    let cancelled = false;
-
-    async function load() {
-      try {
-        setLoading(true);
-        setError(null);
-        const response = await fetch(`https://dummyjson.com/products/${productId}`);
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json();
-        if (!cancelled) setProduct(data);
-      } catch (err) {
-        if (!cancelled) setError(err.message);
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    }
-
-    load();
-    return () => { cancelled = true; };
-  }, [productId]);
+  const { data: product, loading, error } =
+    useFetch(`https://dummyjson.com/products/${productId}`);
+  const { dispatch } = useCart();
 
   if (loading) return <p>Loading product...</p>;
   if (error)   return <p className="error">{error}</p>;

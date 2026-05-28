@@ -21,24 +21,10 @@ function App() {
             onCartClick={() => setView('cart')}
             onLoginClick={() => setView('login')}
           />
-
-          {view === 'list' && (
-            <ProductList
-              onProductClick={id => { setSelectedId(id); setView('detail'); }}
-            />
-          )}
-          {view === 'detail' && (
-            <ProductDetail
-              productId={selectedId}
-              onBack={() => setView('list')}
-            />
-          )}
-          {view === 'cart' && (
-            <Cart onContinueShopping={() => setView('list')} />
-          )}
-          {view === 'login' && (
-            <LoginForm onSuccess={() => setView('list')} />
-          )}
+          {view === 'list'   && <ProductList   onProductClick={id => { setSelectedId(id); setView('detail'); }} />}
+          {view === 'detail' && <ProductDetail productId={selectedId} onBack={() => setView('list')} />}
+          {view === 'cart'   && <Cart           onContinueShopping={() => setView('list')} />}
+          {view === 'login'  && <LoginForm      onSuccess={() => setView('list')} />}
         </div>
       </CartProvider>
     </AuthProvider>

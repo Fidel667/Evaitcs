@@ -1,11 +1,7 @@
-import { useCart } from '../context/CartContext';
-
-export default function CartIcon({ onClick }) {
-  const { totalItems } = useCart();
-
+export default function CartIcon({ count, onClick }) {
   return (
     <button className="cart-button" onClick={onClick}>
-      🛒 Cart ({totalItems})
+      🛒 Cart ({count})
     </button>
   );
 }

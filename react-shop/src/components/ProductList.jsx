@@ -24,14 +24,12 @@ export default function ProductList({ onProductClick }) {
   const total      = data?.total ?? 0;
   const totalPages = Math.ceil(total / PAGE_SIZE);
 
-  function handleSearchChange(value) {
-    setSearchQuery(value);
-    setPage(0);
-  }
-
   return (
     <>
-      <SearchBar value={searchQuery} onChange={handleSearchChange} />
+      <SearchBar
+        value={searchQuery}
+        onChange={value => { setSearchQuery(value); setPage(0); }}
+      />
 
       {error && <p className="error">Error: {error}</p>}
       {loading && <p>Loading...</p>}
@@ -40,7 +38,7 @@ export default function ProductList({ onProductClick }) {
         <>
           <div className="product-grid">
             {products.map(p => (
-              <ProductCard key={p.id} product={p} onClick={onProductClick} />
+              <ProductCard key={p.id} product={p} onClick={() => onProductClick(p.id)} />
             ))}
           </div>
 
@@ -49,7 +47,7 @@ export default function ProductList({ onProductClick }) {
           <Pagination
             page={page}
             totalPages={totalPages}
-            onPrev={() => setPage(p => p - 1)}
+            onPrevious={() => setPage(p => p - 1)}
             onNext={() => setPage(p => p + 1)}
           />
         </>
