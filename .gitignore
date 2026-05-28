@@ -1,2 +1,17 @@
-node_modules/
-*/node_modules/
+# OS
+.DS_Store
+
+# IDE
+.idea/
+*.iml
+
+# Java build output
+**/target/
+out/
+
+# Node
+**/node_modules/
+**/dist/
+
+# Logs
+*.log

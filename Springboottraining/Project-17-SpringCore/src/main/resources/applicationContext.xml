@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+    ============================================================================
+    XML CONFIGURATION — The original way to configure Spring (pre-Java config)
+    ============================================================================
+
+    INSTRUCTIONS:
+    Step 1: Use THIS XML config to run the app first.
+    Step 2: Once it works, switch to AppConfig.java (@Configuration).
+    Step 3: Notice: both produce the same result, but Java config is type-safe!
+
+    INTERVIEW TIP:
+    "I understand XML configuration for maintaining legacy Spring apps,
+     but I prefer Java-based config for new projects because it's type-safe
+     and benefits from IDE autocompletion and refactoring."
+    ============================================================================
+    -->
+
+    <!-- TODO 1: Define the InMemoryRecipeRepository bean -->
+    <!--
+    <bean id="recipeRepository"
+          class="com.evaitcs.springcore.repository.InMemoryRecipeRepository" />
+    -->
+
+    <!-- TODO 2: Define the RecipeService bean with CONSTRUCTOR INJECTION -->
+    <!-- Notice how we reference recipeRepository via constructor-arg -->
+    <!--
+    <bean id="recipeService"
+          class="com.evaitcs.springcore.service.RecipeService">
+        <constructor-arg ref="recipeRepository" />
+    </bean>
+    -->
+
+    <!-- TODO 3: Define the RecipeFormatter bean with SCOPE -->
+    <!--
+    <bean id="recipeFormatter"
+          class="com.evaitcs.springcore.service.RecipeFormatter"
+          scope="singleton"
+          init-method="init"
+          destroy-method="cleanup" />
+    -->
+
+</beans>
+
